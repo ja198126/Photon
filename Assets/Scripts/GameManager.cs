@@ -31,8 +31,22 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("PUN Connected to Master");
     }
+    public void JoinGameRoom()
+    {
+        var options = new RoomOptions
+        {
+            MaxPlayers = 6
+        };
+        PhotonNetwork.JoinOrCreateRoom("Kingdom", options, null);
+    }
+    public override void OnJoinedRoom()
+    {
+        Debug.Log("Joined room!!");
+    }
+
     public override void OnDisconnected(DisconnectCause cause)
     {
         Debug.LogWarningFormat("PUN Disconnected was called by PUN with reason {0}", cause);
     }
+
 }
