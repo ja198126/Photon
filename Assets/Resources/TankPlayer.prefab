@@ -55,6 +55,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11443146, guid: 756d3a6506f2f8241b4e8badde68567a, type: 3}
+      propertyPath: TankTurret
+      value: 
+      objectReference: {fileID: 1180207605908651249}
+    - target: {fileID: 11443146, guid: 756d3a6506f2f8241b4e8badde68567a, type: 3}
+      propertyPath: turretTurnLeft
+      value: 113
+      objectReference: {fileID: 0}
+    - target: {fileID: 11443146, guid: 756d3a6506f2f8241b4e8badde68567a, type: 3}
+      propertyPath: turretTurnRight
+      value: 101
+      objectReference: {fileID: 0}
     - target: {fileID: 22470720, guid: 756d3a6506f2f8241b4e8badde68567a, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -72,6 +84,11 @@ PrefabInstance:
 --- !u!1 &1180207605908698605 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 173472, guid: 756d3a6506f2f8241b4e8badde68567a, type: 3}
+  m_PrefabInstance: {fileID: 1180207605908525133}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1180207605908651249 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 158908, guid: 756d3a6506f2f8241b4e8badde68567a, type: 3}
   m_PrefabInstance: {fileID: 1180207605908525133}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &-6047092525786685577
