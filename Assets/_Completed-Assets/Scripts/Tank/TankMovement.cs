@@ -24,6 +24,7 @@ namespace Complete
         public KeyCode turretTurnRight;
         public GameObject TankTurret;
         private float m_TurnInputValue2;
+        public GameObject aimSlider;
         private void Awake ()
         {
             m_Rigidbody = GetComponent<Rigidbody> ();
@@ -163,13 +164,10 @@ namespace Complete
         }
         public void TurretTurn()
         {
-            float turn = m_TurnInputValue2 * m_TurnSpeed * Time.deltaTime;
-
-            // Make this into a rotation in the y axis.
-            ;
-
-            // Apply this rotation to the rigidbody's rotation.
+            float turn = m_TurnInputValue2 * m_TurnSpeed * Time.deltaTime;           
             TankTurret.transform.Rotate(Vector3.up,turn);
+            aimSlider.transform.position = TankTurret.transform.position;
+            
         }
     }
 }

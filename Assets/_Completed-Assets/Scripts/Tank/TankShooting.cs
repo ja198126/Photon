@@ -17,7 +17,7 @@ namespace Complete
         public float m_MaxLaunchForce = 30f;        // The force given to the shell if the fire button is held for the max charge time.
         public float m_MaxChargeTime = 0.75f;       // How long the shell can charge for before it is fired at max force.
 
-
+        
         private string m_FireButton;                // The input axis that is used for launching shells.
         private float m_CurrentLaunchForce;         // The force that will be given to the shell when the fire button is released.
         private float m_ChargeSpeed;                // How fast the launch force increases, based on the max charge time.
@@ -90,7 +90,7 @@ namespace Complete
             // Create an instance of the shell and store a reference to it's rigidbody.
             Rigidbody shellInstance =
                 Instantiate (m_Shell, m_FireTransform.position, m_FireTransform.rotation) as Rigidbody;
-            photonView.RPC("FireOther", RpcTarget.Others, m_FireTransform.position);
+            photonView.RPC("FireOther", RpcTarget.Others, m_FireTransform.position,m_CurrentLaunchForce);
 
             // Set the shell's velocity to the launch force in the fire position's forward direction.
             shellInstance.velocity = m_CurrentLaunchForce * m_FireTransform.forward; 
@@ -103,11 +103,12 @@ namespace Complete
             m_CurrentLaunchForce = m_MinLaunchForce;
         }
         [PunRPC]
-        void FireOther(Vector3 pos)
+        void FireOther(Vector3 pos,float force)
         {
             m_Fired = true;
             Rigidbody shellInstance = Instantiate(m_Shell, pos, m_FireTransform.rotation) as Rigidbody;
-            shellInstance.velocity = m_CurrentLaunchForce * m_FireTransform.forward;
+            
+            shellInstance.velocity = force * m_FireTransform.forward;
             m_CurrentLaunchForce = m_MinLaunchForce;
         }
     }
