@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public static GameManager instance;
     string gameVersion = "1";
     public static GameObject localPlayer;
+    
     GameObject defaultSpawnPoint;
 
     void Awake()
