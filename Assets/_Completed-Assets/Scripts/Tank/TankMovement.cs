@@ -20,9 +20,16 @@ namespace Complete
         private float m_OriginalPitch;              // The pitch of the audio source at the start of the scene.
         private ParticleSystem[] m_particleSystems; // References to all the particles systems used by the Tanks
 
+        public KeyCode turretTurnLeft;
+        public KeyCode turretTurnRight;
+        public GameObject TankTurret;
+        private float m_TurnInputValue2;
+        
         private void Awake ()
         {
             m_Rigidbody = GetComponent<Rigidbody> ();
+            turretTurnLeft = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("leftKey", "Q"));
+            turretTurnRight = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("rightKey", "E"));
         }
 
 
@@ -75,7 +82,24 @@ namespace Complete
             // Store the value of both input axes.
             m_MovementInputValue = Input.GetAxis (m_MovementAxisName);
             m_TurnInputValue = Input.GetAxis (m_TurnAxisName);
-
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                m_TurnInputValue2 = 0;
+                m_TurnInputValue2 += 1.0f;              
+            }
+            if (Input.GetKeyUp(KeyCode.E))
+            {
+                m_TurnInputValue2 = 0;               
+            }
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                m_TurnInputValue2 = 0;
+                m_TurnInputValue2 += -1.0f;
+            }
+            if (Input.GetKeyUp(KeyCode.Q))
+            {
+                m_TurnInputValue2 = 0;
+            }
             EngineAudio ();
         }
 
@@ -113,6 +137,7 @@ namespace Complete
             // Adjust the rigidbodies position and orientation in FixedUpdate.
             Move ();
             Turn ();
+            TurretTurn();
         }
 
 
@@ -136,6 +161,14 @@ namespace Complete
 
             // Apply this rotation to the rigidbody's rotation.
             m_Rigidbody.MoveRotation (m_Rigidbody.rotation * turnRotation);
+        }
+        public GameObject a;
+        public void TurretTurn()
+        {
+            float turn = m_TurnInputValue2 * m_TurnSpeed * Time.deltaTime;
+            TankTurret.transform.Rotate(Vector3.up, turn);
+            a.transform.forward = TankTurret.transform.forward;
+
         }
     }
 }
